@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>conjuntos</title>
+    <style>
+        /* Estilo geral para o corpo da página */
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #c5f4e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Estilos para o container*/
+        main {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px
+        }
+
+        /* Estilo para titulo principal*/
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        /* Estilo para container que envolve as colunas*/
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        /*.container {
+            max-width: 1000px;
+            margin: 20px auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+
+        }*/
+        /* Estilo para cada coluna*/
+        .coluna {
+            width: calc(33.33% - 20px);
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            /*margin: 10px;*/
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease-in-out;
+
+        }
+
+        /* Efeito de hover nas colunas*/
+        .coluna:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Estilo para titulos secundarios*/
+        h2,
+        h3 {
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        /* Estilo para labels*/
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #777;
+        }
+
+        /* Estilos para area de textos*/
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        /* Estilo para os botões*/
+        button {
+            padding: 10px 20px;
+            background-color: #5cb85c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        /* Estilos para os botões no hover e focus */
+        button:hover button:focus {
+            background-color: #4cae4c;
+            outline: none;
+        }
+
+        button:focus {
+            box-shadow: 0 0 0 3px rgba(76, 174, 76, 0.5);
+        }
+
+        /* Estilo para os resultados*/
+        #resultadoAssociatividadeUniao,
+        #resultadoIntersecao,
+        #resultadoDistribuidadeUniao,
+        #resultadoDistribuidadeIntersecao,
+        #resultadoComplementarUniao,
+        #resultadoComplementarIntersecao {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            word-break: break-word;
+            min-height: 50px;
+
+        }
+
+        /* Estilos para os fieldsets */
+        fieldset {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+
+        /* Estilos para as legends */
+        legend {
+            color: #777;
+            padding: 0 10px;
+        }
+
+        /* Media queries para layout responsivo */
+        @media (max-width: 768px) {
+            .coluna {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .coluna {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!--container principal da página-->
+    <main>
+        <!--titulo da pagina-->
+        <h1>Operação de Conjuntos</h1>
+        <!--container para as colunas das operações-->
+        <div class="container">
+
+            <!-- bloco Associativa (união)-->
+            <div class="coluna">
+                <!-- Fieldset para agrupar os campos da Associatividade da União -->
+                <fieldset>
+                    <legend>Associativa da União</legend>
+                    <label for="conjuntoA">Conjunto A:</label>
+                    <textarea id="conjuntoA" aria-label="conjunto A"></textarea>
+                    <label for="conjuntoB">Conjunto B:</label>
+                    <textarea id="conjuntoB" aria-label="conjunto B"></textarea>
+                    <label for="conjuntoC">Conjunto C:</label>
+                    <textarea id="conjuntoC" aria-label="conjunto C"></textarea>
+                    <button onclick="calcularUniao()" aria-label="calcular União">Calcular União</button>
+                    <div id="resultadoAssociatividadeUniao"></div>
+                </fieldset>
+            </div>
+
+            <!--bloco assositava(Interseção)-->
+            <div class="coluna">
+                <!-- Fieldset para agrupar os campos da Interseção de Conjuntos -->
+                <fieldset>
+                    <legend>Interseção de Conjuntos</legend>
+                    <label for="conjuntoD">Conjunto A:</label>
+                    <textarea id="conjuntoD" aria-label="conjunto D"></textarea>
+                    <label for="conjuntoE">Conjunto B:</label>
+                    <textarea id="conjuntoE" aria-label="conjunto E"></textarea>
+                    <label for="conjuntoF">Conjunto C:</label>
+                    <textarea id="conjuntoF" aria-label="conjunto F"></textarea>
+                    <button onclick="calcularIntersecao()" aria-label="calcular Interseção">Calcular Interseção</button>
+                    <div id="resultadoIntersecao"></div>
+                </fieldset>
+            </div>
+
+            <!-- bloco Distribuidade da união sobre a interseção-->
+            <div class="coluna">
+                <!-- Fieldset para agrupar os campos da Distribuidade da União sobre a Interseção -->
+                <fieldset>
+                    <legend>Distribuidade da União sobre a Interseção</legend>
+                    <label for="conjuntoG">Conjunto A:</label>
+                    <textarea id="conjuntoG" aria-label="conjunto G"></textarea>
+                    <label for="conjuntoH">Conjunto B:</label>
+                    <textarea id="conjuntoH" aria-label="conjunto H"></textarea>
+                    <label for="conjuntoI">Conjunto C:</label>
+                    <textarea id="conjuntoI" aria-label="conjunto I"></textarea>
+                    <button onclick="calcularDistribuidadeUniao()" aria-label="calcular Distribuidade da União">Calcular
+                        Distribuidade da União</button>
+                    <div id="resultadoDistribuidadeUniao"></div>
+                </fieldset>
+            </div>
+
+            <!--bloco Distribuidade da Interseção sobre a União-->
+            <div class="coluna">
+
+                <!-- Fieldset para agrupar os campos da Distribuidade da Interseção sobre a União -->
+                <fieldset>
+                    <legend>Distribuidade da Interseção sobre a união</legend>
+                    <label for="conjuntoJ">Conjunto A:</label>
+                    <textarea id="conjuntoJ" aria-label="conjunto J"></textarea>
+                    <label for="conjuntoK">Conjunto B:</label>
+                    <textarea id="conjuntoK" aria-label="conjunto K"></textarea>
+                    <label for="conjuntoL">Conjunto C:</label>
+                    <textarea id="conjuntoL" aria-label="conjunto L"></textarea>
+                    <button onclick="calcularDistribuidadeIntersecao()"
+                        aria-label="calcular Distribuidade Interseção">Calcular Distribuidade da Interseção sobre a
+                        União</button>
+                    <div id="resultadoDistribuidadeIntersecao"></div>
+                </fieldset>
+            </div>
+        </div>
+        <!--container para as operaçoões da lei de Morgan-->
+        <div class="container">
+            <!--bloco Morgan(complementar da união)-->
+            <div class="coluna">
+                <!-- Fieldset para agrupar os campos da Lei de Morgan - Complementar da União -->
+                <fieldset>
+                    <legend>Lei de Morgan- complemtentar da União</legend>
+                    <label for="conjuntoM">Conjunto A:</label>
+                    <textarea id="conjuntoM" aria-label="conjunto M"></textarea>
+                    <label for="conjuntoN">Conjunto B:</label>
+                    <textarea id="conjuntoN" aria-label="conjunto N"></textarea>
+                    <label for="conjuntoUniverso">Conunto Universo:</label>
+                    <textarea id="conjuntoUniverso" aria-label="conjunto Universo"></textarea>
+                    <button onclick="calcularComplementarUniao()" aria-label="calcular Complementar da União">Calcular
+                        Complementar da União</button>
+                    <div id="resultadoComplementarUniao"></div>
+                </fieldset>
+            </div>
+
+            <!-- Bloco para de Lei de Morgan - Complementar da Interseção -->
+            <div class="coluna">
+                <!-- Fieldset para agrupar os campos da Lei de Morgan - Complementar da Interseção -->
+                <fieldset>
+                    <legend>Complementar da Interseção da União</legend>
+                    <label for="conjuntoO">Conjunto A:</label>
+                    <textarea id="conjuntoO" aria-label="conjunto O"></textarea>
+                    <label for="conjuntoP">Conjunto B:</label>
+                    <textarea id="conjuntoP" aria-label="conjunto P"></textarea>
+                    <label for="conjuntoUniverso2">Conjunto Universo:</label>
+                    <textarea id="conjuntoUniverso2" aria-label="conjunto Universo 2"></textarea>
+                    <button onclick="calcularComplementarIntersecao()"
+                        aria-label="calcular Complementar da Interseção">Calcular complementar da Interseção</button>
+                    <div id="resultadoComplementarIntersecao"></div>
+                </fieldset>
+            </div>
+    </main>
+
+    <script>
+        // Função auxiliar para validar se um conjunto é válido
+        function validarConjunto(conjunto) {
+            return conjunto && conjunto.length > 0; // Verifica se o conjunto existe e não está vazio
+        }
+
+        // Função para calcular a união de dois conjuntos
+        function uniao(conjuntoA, conjuntoB) {
+            return [...new Set([...conjuntoA, ...conjuntoB])]; // Utiliza o objeto Set para remover duplicatas eretorna um novo array contendo todos os elementos únicos de ambos os conjuntos */
+        }
+
+        // Função para calcular a interseção de dois conjuntos
+        function intersecao(conjuntoA, conjuntoB) {
+            return conjuntoA.filter(value => conjuntoB.includes(value)); // Filtra os elementos do conjuntoA,mantendo apenas aqueles que também estão presentes no conjuntoB */
+        }
+
+        // Função para calcular o complementar de um conjunto em relação ao universo
+        function complementar(conjuntoA, conjuntoUniverso) {
+            return conjuntoUniverso.filter(value => !conjuntoA.includes(value)); // Filtra os elementos do conjuntoUniverso,mantendo apenas aqueles que não estão presentes no conjuntoA */
+        }
+
+        // Função para verificar igualdade entre dois conjuntos
+        function igualdadeConjuntos(conjuntoA, conjuntoB) {
+            return JSON.stringify([...new Set(conjuntoA)].sort()) === JSON.stringify([...new Set(conjuntoB)].sort()); //Converte os conjuntos em strings JSON após remover duplicatas e ordenar,para garantir que a ordem não afete a comparação */
+        }
+
+        // Função genérica para calcular operações de conjuntos e exibir resultados
+        function calcularOperacao(conjuntoIds, operacao, resultadoId) {
+            // Mapeia os IDs dos conjuntos para os valores dos campos de texto correspondentes
+            const conjuntos = conjuntoIds.map(id => {
+                const valor = document.getElementById(id).value.trim(); // Obtém o valor do campo de texto e remove espaços em branco
+                return valor === '' ? [] : valor.split(/,\s*/).map(item => item.trim()); /// Se o valor for vazio, retorna um array vazio caso contrário, divide a string em um array de elementos,separando-os por vírgulas e removendo espaços em branco */
+            });
+
+            // Verifica se algum dos conjuntos é inválido
+            if (conjuntos.some(conjunto => !validarConjunto(conjunto))) {
+                alert("Por favor, preencha todos os conjuntos."); // Exibe um alerta se algum conjunto estiver vazio
+                return; // Aborta a função
+            }
+
+            try {
+                const resultado = operacao(...conjuntos); // Executa a operação com os conjuntos
+                document.getElementById(resultadoId).innerHTML = resultado; // Exibe o resultado no elemento HTML correspondente
+            } catch (error) {
+                console.error("Ocorreu um erro:", error); // Exibe o erro no console
+                alert("Ocorreu um erro ao calcular. Verifique os dados de entrada."); // Exibe um alerta de erro ao usuário
+            }
+        }
+
+        // Função para calcular a Associatividade da União
+        function calcularUniao() {
+            calcularOperacao(["conjuntoA", "conjuntoB", "conjuntoC"], (a, b, c) => { // Chama a função genérica calcularOperacao com os IDs dos conjuntos e a função para calcular a Associatividade da União 
+                const ladoEsquerdo = uniao(uniao(a, b), c); // Calcula o lado esquerdo da expressão
+                const ladoDireito = uniao(a, uniao(b, c)); // Calcula o lado direito da expressão
+                const resultado = igualdadeConjuntos(ladoEsquerdo, ladoDireito); // Verifica se os lados são iguais
+
+                return `Lado Esquerdo: ${ladoEsquerdo.join(', ')}<br>
+                        Lado Direito: ${ladoDireito.join(', ')}<br>
+                        Resultado: ${resultado}`; // Retorna uma string formatada com os resultados dos cálculos e a verificação de igualdade
+            }, "resultadoAssociatividadeUniao"); // Define o ID do elemento HTML onde o resultado será exibido
+        }
+
+        //Função para calcular a Interseção de Conjuntos*/
+        function calcularIntersecao() {
+            calcularOperacao(["conjuntoD", "conjuntoE", "conjuntoF"], (d, e, f) => { // Chama a função genérica calcularOperacaocom os IDs dos conjuntos e a função para calcular a Interseção de Conjuntos
+                const intersecaoDE = intersecao(d, e); // Calcula a interseção dos conjuntos D e E
+                const intersecaoTotal = intersecao(intersecaoDE, f); // Calcula a interseção do resultado anterior com o conjunto F
+
+                return `Interseção: ${intersecaoTotal.join(', ')}`; // Retorna uma string formatada com o resultado da interseção total
+            }, "resultadoIntersecao"); // Define o ID do elemento HTML onde o resultado será exibido
+        }
+
+        // Função para calcular a Distribuidade da União sobre a Interseção
+        function calcularDistribuidadeUniao() {
+            calcularOperacao(["conjuntoG", "conjuntoH", "conjuntoI"], (g, h, i) => { // Chama a função genérica calcularOperacao com os IDs dos conjuntos e a função para calcular a Distribuidade da União sobre a Interseção */
+                const intersecaoHI = intersecao(h, i); // Calcula a interseção dos conjuntos H e I
+                const ladoEsquerdo = uniao(g, intersecaoHI); // Calcula o lado esquerdo da expressão
+                const uniaoGH = uniao(g, h); // Calcula a união dos conjuntos G e H
+                const uniaoGI = uniao(g, i); // Calcula a união dos conjuntos G e I
+                const ladoDireito = intersecao(uniaoGH, uniaoGI); // Calcula o lado direito da expressão
+                const resultado = igualdadeConjuntos(ladoEsquerdo, ladoDireito); // Verifica se os lados são iguais
+
+                return `Lado Esquerdo: ${ladoEsquerdo.join(', ')}<br>
+                        Lado Direito: ${ladoDireito.join(', ')}<br>
+                        Resultado: ${resultado}`; /* Retorna uma string formatada com os resultados dos cálculos e a verificação de igualdade */
+            }, "resultadoDistribuidadeUniao"); // Define o ID do elemento HTML onde o resultado será exibido
+        }
+
+        // Função para calcular a Distribuidade da Interseção sobre a União
+        function calcularDistribuidadeIntersecao() {
+            calcularOperacao(["conjuntoJ", "conjuntoK", "conjuntoL"], (j, k, l) => { //Chama a função genérica calcularOperacao com os IDs dos conjuntos e a função para calcular a Distribuidade da Interseção sobre a União */
+                const uniaoKL = uniao(k, l); // Calcula a união dos conjuntos K e L
+                const ladoEsquerdo = intersecao(j, uniaoKL); // Calcula o lado esquerdo da expressão
+                const intersecaoJK = intersecao(j, k); // Calcula a interseção dos conjuntos J e K
+                const intersecaoJL = intersecao(j, l); // Calcula a interseção dos conjuntos J e L
+                const ladoDireito = uniao(intersecaoJK, intersecaoJL); // Calcula o lado direito da expressão
+                const resultado = igualdadeConjuntos(ladoEsquerdo, ladoDireito); // Verifica se os lados são iguais
+
+                return `Lado Esquerdo: ${ladoEsquerdo.join(', ')}<br>
+                        Lado Direito: ${ladoDireito.join(', ')}<br>
+                        Resultado: ${resultado}`; /* Retorna uma string formatada com os resultados dos cálculos e a verificação de igualdade */
+            }, "resultadoDistribuidadeIntersecao"); // Define o ID do elemento HTML onde o resultado será exibido
+        }
+
+        // Função para calcular a Lei de Morgan - Complementar da União
+        function calcularComplementarUniao() {
+            calcularOperacao(["conjuntoM", "conjuntoN", "conjuntoUniverso"], (m, n, universo) => { // Chama a função genérica calcularOperacao com os IDs dos conjuntos e a função para calcular a Lei de Morgan - Complementar da União */
+                const uniaoMN = uniao(m, n); // Calcula a união dos conjuntos M e N
+                const complementarUniao = complementar(uniaoMN, universo); // Calcula o complementar da união em relação ao universo
+                const complementarM = complementar(m, universo); // Calcula o complementar do conjunto M em relação ao universo
+                const complementarN = complementar(n, universo); // Calcula o complementar do conjunto N em relação ao universo
+                const intersecaoComplementares = intersecao(complementarM, complementarN); // Calcula a interseção dos complementares
+                const resultado = igualdadeConjuntos(complementarUniao, intersecaoComplementares); // Verifica se os lados são iguais
+
+                return `Complementar da União: ${complementarUniao.join(', ')}<br>
+                        Interseção dos Complementares: ${intersecaoComplementares.join(', ')}<br>
+                        Resultado: ${resultado}`; /* Retorna uma string formatada com os resultados dos cálculos e a verificação de igualdade */
+            }, "resultadoComplementarUniao"); // Define o ID do elemento HTML onde o resultado será exibido
+        }
+
+        // Função para calcular a Lei de Morgan - Complementar da Interseção
+        function calcularComplementarIntersecao() {
+            calcularOperacao(["conjuntoO", "conjuntoP", "conjuntoUniverso2"], (o, p, universo) => { // Chama a função genérica calcularOperacao   com os IDs dos conjuntos e a função para calcular a Lei de Morgan - Complementar da Interseção */
+                const intersecaoOP = intersecao(o, p); // Calcula a interseção dos conjuntos O e P
+                const complementarIntersecao = complementar(intersecaoOP, universo); // Calcula o complementar da interseção em relação ao universo
+                const complementarO = complementar(o, universo); // Calcula o complementar do conjunto O em relação ao universo
+                const complementarP = complementar(p, universo); // Calcula o complementar do conjunto P em relação ao universo
+                const uniaoComplementares = uniao(complementarO, complementarP); // Calcula a união dos complementares
+                const resultado = igualdadeConjuntos(complementarIntersecao, uniaoComplementares); // Verifica se os lados são iguais
+
+                return `Complementar da Interseção: ${complementarIntersecao.join(', ')}<br>
+                        União dos Complementares: ${uniaoComplementares.join(', ')}<br>
+                        Resultado: ${resultado}`; /* Retorna uma string formatada com os resultados dos cálculos e a verificação de igualdade */
+            }, "resultadoComplementarIntersecao"); // Define o ID do elemento HTML onde o resultado será exibido
+        }
+
+    </script>
+</body>
+
+</html>
